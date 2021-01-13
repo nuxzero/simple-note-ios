@@ -26,7 +26,7 @@
             </objects>
             <point key="canvasLocation" x="-2303" y="-269"/>
         </scene>
-        <!--Notes View Controller-->
+        <!--Notes-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="NotesViewController" customModule="SimpleNoteMVC" customModuleProvider="target" sceneMemberID="viewController">
@@ -61,6 +61,7 @@
                                         <connections>
                                             <outlet property="thumbImageView" destination="ws5-Su-vr7" id="Lja-jD-si3"/>
                                             <outlet property="titleLabel" destination="hhs-Jk-0bY" id="jgx-RG-tpk"/>
+                                            <segue destination="agr-Am-S4S" kind="show" identifier="ToNoteDetail" id="H1Q-hm-pXA"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -79,7 +80,13 @@
                             <constraint firstItem="NZS-QW-yRG" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="pwQ-wS-onr"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="P5K-iU-GXM"/>
+                    <navigationItem key="navigationItem" title="Notes" id="P5K-iU-GXM">
+                        <barButtonItem key="rightBarButtonItem" title="New Note" image="plus" catalog="system" id="zrF-9u-sjc">
+                            <connections>
+                                <segue destination="1Vz-tN-rMC" kind="modal" identifier="ToNoteForm" id="r7U-Ld-FXP"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="NZS-QW-yRG" id="uPv-W1-fVT"/>
                     </connections>
@@ -87,6 +94,87 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-143.07692307692307" y="-603.55450236966817"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="nxo-WT-yIB">
+            <objects>
+                <navigationController id="1Vz-tN-rMC" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="CLW-uX-bAG"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="kdm-yg-SPn">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="56"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="tdP-Sa-rfn" kind="relationship" relationship="rootViewController" id="GV6-u2-WSq"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LB7-Eu-78d" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="627" y="-750"/>
+        </scene>
+        <!--New Note-->
+        <scene sceneID="B9t-Wg-iOu">
+            <objects>
+                <viewController id="tdP-Sa-rfn" customClass="NoteFormViewController" customModule="SimpleNoteMVC" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Bx7-8W-rdq">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="790"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="zeq-5H-nZU"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="New Note" id="XhT-f5-4Qn">
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="GhH-8j-uU2"/>
+                        <barButtonItem key="rightBarButtonItem" title="Save" id="aON-79-XUF"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="saveButton" destination="aON-79-XUF" id="c6e-Pb-26Q"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BbY-ao-rfz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1543" y="-750"/>
+        </scene>
+        <!--Detail-->
+        <scene sceneID="fHe-tu-phz">
+            <objects>
+                <viewController id="agr-Am-S4S" customClass="NoteDetailViewController" customModule="SimpleNoteMVC" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="q0e-eo-1rh">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Title label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IRr-rA-0F2">
+                                <rect key="frame" x="30" y="132" width="330" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Description label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z6v-oe-wDA">
+                                <rect key="frame" x="30" y="174" width="330" height="212"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="ihv-qZ-oKG"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Detail" id="OFV-x5-lJl">
+                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="eBC-5U-h8U">
+                            <connections>
+                                <action selector="editNote:" destination="agr-Am-S4S" id="saQ-0q-Jdh"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="descriptionLabel" destination="Z6v-oe-wDA" id="Y0v-Zc-fYB"/>
+                        <outlet property="titleLabel" destination="IRr-rA-0F2" id="WlJ-mL-Vfz"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1fe-ha-XaW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1244.6153846153845" y="-55.45023696682464"/>
         </scene>
         <!--Root View Controller-->
         <scene sceneID="Jpp-dc-0Ov">
@@ -153,6 +241,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="plus" catalog="system" width="128" height="113"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

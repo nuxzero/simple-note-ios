@@ -9,6 +9,8 @@ import Foundation
 
 class NoteService {
     
+    static let shared = NoteService()
+    
     func retrieveNotes() -> Array<Note> {
         return [
             Note(

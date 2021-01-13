@@ -11,10 +11,10 @@ class NotesViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     @IBOutlet weak var tableView: UITableView!
     
-    let noteService = NoteService()
+    let noteService = NoteService.shared
     var notes:[Note] = []
     
-    override func viewDidLoad() {
+    override func viewDidLoad() { 
         notes = noteService.retrieveNotes()
         print(notes)
     }
@@ -43,5 +43,15 @@ class NotesViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return CGFloat(90)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
+        
+        guard let noteDetailViewController = segue.destination as? NoteDetailViewController, segue.identifier == "ToNoteDetail" else {
+                fatalError("The segue is not an instance of NoteDetailViewController.")
+            }
+        
+        noteDetailViewController.note = notes[tableView.indexPathForSelectedRow!.row]
     }
 }
