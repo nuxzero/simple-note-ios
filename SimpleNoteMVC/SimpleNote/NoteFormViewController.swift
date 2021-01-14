@@ -9,7 +9,12 @@ import UIKit
 
 class NoteFormViewController: UIViewController {
 
-    @IBOutlet weak var saveButton: UIBarButtonItem!
+    @IBOutlet weak var titleTextField: UITextField!
+    @IBOutlet weak var noteTextField: UITextField!
+    
+    var delegate: NoteFormDelegate?
+    
+    private let noteService = NoteService.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -17,7 +22,25 @@ class NoteFormViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-
+    @IBAction func saveNote(_ sender: UIBarButtonItem) {
+        let note = Note(
+            id:Int.random(in: 1..<1000),
+            title: titleTextField.text ?? "",
+            note: noteTextField.text ?? "",
+            author: "",
+            image: "",
+            createdAt: Date()
+        )
+        noteService.addNote(note)
+        delegate?.noteFormSaved()
+        dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func cancel(_ sender: UIBarButtonItem) {
+        delegate?.noteFormCancelled()
+        dismiss(animated: true, completion: nil)
+    }
+    
     /*
     // MARK: - Navigation
 
@@ -28,4 +51,9 @@ class NoteFormViewController: UIViewController {
     }
     */
 
+}
+
+protocol NoteFormDelegate {
+    func noteFormSaved()
+    func noteFormCancelled()
 }

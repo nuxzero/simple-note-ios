@@ -11,8 +11,10 @@ class NoteService {
     
     static let shared = NoteService()
     
-    func retrieveNotes() -> Array<Note> {
-        return [
+    private var notes:[Note] = []
+    
+    init() {
+        notes += [
             Note(
                 id: 1,
                 title: "Lorem ipsum dolor sit amet",
@@ -30,5 +32,14 @@ class NoteService {
                 createdAt: Date()
             ),
         ]
+        
+    }
+    
+    func retrieveNotes() -> Array<Note> {
+        return notes
+    }
+    
+    func addNote(_ note: Note) {
+        notes.append(note)
     }
 }

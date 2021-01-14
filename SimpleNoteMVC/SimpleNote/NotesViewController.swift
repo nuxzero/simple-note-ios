@@ -19,6 +19,12 @@ class NotesViewController: UIViewController, UITableViewDataSource, UITableViewD
         print(notes)
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        notes = noteService.retrieveNotes()
+        print("Reload data \(notes)")
+        tableView.reloadData()
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return notes.count
     }
@@ -27,7 +33,7 @@ class NotesViewController: UIViewController, UITableViewDataSource, UITableViewD
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "NoteTableViewCell", for: indexPath) as? NoteTableViewCell else {
             fatalError("The dequeued cell is not an instance of NoteTableViewCell.")
         }
-
+        
         let note = notes[indexPath.row]
         
         cell.titleLabel.text = note.title
@@ -48,10 +54,30 @@ class NotesViewController: UIViewController, UITableViewDataSource, UITableViewD
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
         
-        guard let noteDetailViewController = segue.destination as? NoteDetailViewController, segue.identifier == "ToNoteDetail" else {
+        if segue.identifier == "ToNoteDetail" {
+            guard let noteDetailViewController = segue.destination as? NoteDetailViewController else {
                 fatalError("The segue is not an instance of NoteDetailViewController.")
             }
-        
-        noteDetailViewController.note = notes[tableView.indexPathForSelectedRow!.row]
+            noteDetailViewController.note = notes[tableView.indexPathForSelectedRow!.row]
+        } else if segue.identifier == "ToNoteForm" {
+            guard let navigationController = segue.destination as? UINavigationController else {
+                fatalError("The segue is not an instance of UINavigationController.")
+            }
+            guard let noteFormViewController = navigationController.children[0] as? NoteFormViewController else {
+                fatalError("The segue is not an instance of NoteFormViewController.")
+            }
+            noteFormViewController.delegate = self
+        }
+    }
+}
+
+extension NotesViewController: NoteFormDelegate {
+    func noteFormSaved() {
+        notes = noteService.retrieveNotes()
+        tableView.reloadData()
+    }
+    
+    func noteFormCancelled() {
+        print("Cancelled.")
     }
 }

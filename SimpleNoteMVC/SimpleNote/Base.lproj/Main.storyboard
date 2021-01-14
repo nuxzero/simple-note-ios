@@ -119,20 +119,57 @@
                     <view key="view" contentMode="scaleToFill" id="Bx7-8W-rdq">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="790"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KdL-O7-8ST">
+                                <rect key="frame" x="16" y="119" width="358" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EPk-WG-KuK">
+                                <rect key="frame" x="16" y="90" width="33" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Note" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wfk-QW-Xd4">
+                                <rect key="frame" x="16" y="161" width="37" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RNn-GC-NZ1">
+                                <rect key="frame" x="16" y="190" width="358" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="zeq-5H-nZU"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" title="New Note" id="XhT-f5-4Qn">
-                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="GhH-8j-uU2"/>
-                        <barButtonItem key="rightBarButtonItem" title="Save" id="aON-79-XUF"/>
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="GhH-8j-uU2">
+                            <connections>
+                                <action selector="cancel:" destination="tdP-Sa-rfn" id="kI8-VA-8bN"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Save" id="aON-79-XUF">
+                            <connections>
+                                <action selector="saveNote:" destination="tdP-Sa-rfn" id="c2Q-U5-viD"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="saveButton" destination="aON-79-XUF" id="c6e-Pb-26Q"/>
+                        <outlet property="noteTextField" destination="RNn-GC-NZ1" id="F4H-6K-b6G"/>
+                        <outlet property="titleTextField" destination="KdL-O7-8ST" id="gUM-Ot-NbY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BbY-ao-rfz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1543" y="-750"/>
+            <point key="canvasLocation" x="1541.5384615384614" y="-750"/>
         </scene>
         <!--Detail-->
         <scene sceneID="fHe-tu-phz">
