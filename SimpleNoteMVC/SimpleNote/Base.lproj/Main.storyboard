@@ -158,16 +158,18 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Save" id="aON-79-XUF">
                             <connections>
-                                <action selector="saveNote:" destination="tdP-Sa-rfn" id="c2Q-U5-viD"/>
+                                <segue destination="bKn-OY-8J0" kind="unwind" unwindAction="unwindToNoteList:" id="MC9-MU-EqP"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="noteTextField" destination="RNn-GC-NZ1" id="F4H-6K-b6G"/>
+                        <outlet property="saveButton" destination="aON-79-XUF" id="4Vd-ST-tfn"/>
                         <outlet property="titleTextField" destination="KdL-O7-8ST" id="gUM-Ot-NbY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BbY-ao-rfz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="bKn-OY-8J0" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1541.5384615384614" y="-750"/>
         </scene>
