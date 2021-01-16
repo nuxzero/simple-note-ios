@@ -16,15 +16,8 @@ class NotesViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     override func viewDidLoad() { 
         notes = noteService.retrieveNotes()
-        print(notes)
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        notes = noteService.retrieveNotes()
-        print("Reload data \(notes)")
-        tableView.reloadData()
-    }
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return notes.count
     }
@@ -37,6 +30,7 @@ class NotesViewController: UIViewController, UITableViewDataSource, UITableViewD
         let note = notes[indexPath.row]
         
         cell.titleLabel.text = note.title
+        ImageLoader.loadImage(with: cell.thumbImageView, for: note.image)
         
         return cell
     }
