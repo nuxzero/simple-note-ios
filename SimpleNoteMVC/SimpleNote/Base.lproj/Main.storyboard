@@ -143,7 +143,7 @@
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RNn-GC-NZ1">
                                 <rect key="frame" x="16" y="190" width="358" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                         </subviews>
@@ -158,7 +158,7 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Save" id="aON-79-XUF">
                             <connections>
-                                <segue destination="bKn-OY-8J0" kind="unwind" unwindAction="unwindToNoteList:" id="MC9-MU-EqP"/>
+                                <action selector="saveNote:" destination="tdP-Sa-rfn" id="lht-uN-gMz"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -169,7 +169,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BbY-ao-rfz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <exit id="bKn-OY-8J0" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1541.5384615384614" y="-750"/>
         </scene>

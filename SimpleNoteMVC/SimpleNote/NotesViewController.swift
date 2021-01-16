@@ -66,17 +66,7 @@ class NotesViewController: UIViewController, UITableViewDataSource, UITableViewD
             guard let noteFormViewController = navigationController.children[0] as? NoteFormViewController else {
                 fatalError("The segue is not an instance of NoteFormViewController.")
             }
-//            noteFormViewController.delegate = self
-        }
-    }
-    
-    @IBAction func unwindToNoteList(_ sender: UIStoryboardSegue) {
-        print("unwindToNoteList")
-        if let noteFormViewController = sender.source as? NoteFormViewController,
-           let note = noteFormViewController.note {
-            print("unwindToNoteList \(note)")
-            notes = noteService.retrieveNotes()
-            tableView.reloadData()
+            noteFormViewController.delegate = self
         }
     }
 }
