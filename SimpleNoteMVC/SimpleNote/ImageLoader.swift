@@ -11,7 +11,7 @@ import Foundation
 class ImageLoader {
     static func loadImage(with imageView: UIImageView, for urlString: String) {
         guard let url = URL(string: urlString) else {
-            fatalError("Can not instantiate URL with \(urlString).")
+            return
         }
         
         URLSession.shared.dataTask(with: url) { (data, urlResponse, error) in

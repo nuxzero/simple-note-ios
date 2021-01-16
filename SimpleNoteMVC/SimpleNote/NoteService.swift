@@ -54,4 +54,8 @@ class NoteService {
         notes.remove(at: index)
         notes.insert(note, at: index)
     }
+    
+    func deleteNote(_ id: Int) {
+        notes.removeAll(where: {return $0.id == id})
+    }
 }
