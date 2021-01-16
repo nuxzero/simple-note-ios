@@ -39,7 +39,19 @@ class NoteService {
         return notes
     }
     
+    func retrieveNote(_ id: Int) -> Note? {
+        return notes.first(where: {return $0.id == id})
+    }
+    
     func addNote(_ note: Note) {
         notes.append(note)
+    }
+    
+    func updateNote(_ note: Note) {
+        guard let index = notes.firstIndex(where: {return $0.id == note.id}) else {
+            fatalError("Index not found.")
+        }
+        notes.remove(at: index)
+        notes.insert(note, at: index)
     }
 }

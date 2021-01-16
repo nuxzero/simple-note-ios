@@ -16,22 +16,38 @@ class NoteFormViewController: UIViewController, UITextFieldDelegate {
     var delegate: NoteFormDelegate?
     var note: Note?
     private let noteService = NoteService.shared
+    var isNewNote = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+      
+        if note != nil {
+            isNewNote = false
+            titleTextField.text = note?.title
+            noteTextField.text = note?.note
+        }
     }
     
     @IBAction func saveNote(_ sender: UIBarButtonItem) {
-        note = Note(
-            id:Int.random(in: 1..<1000),
-            title: titleTextField.text ?? "",
-            note: noteTextField.text ?? "",
-            author: "",
-            image: "",
-            createdAt: Date()
-        )
-        noteService.addNote(note!)
+        if isNewNote {
+            note = Note(
+                id:Int.random(in: 1..<1000),
+                title: titleTextField.text ?? "",
+                note: noteTextField.text ?? "",
+                author: "",
+                image: "",
+                createdAt: Date()
+            )
+            noteService.addNote(note!)
+        } else {
+            guard var editingNote = note else {
+                fatalError("Note must not be nil.")
+            }
+            editingNote.title = titleTextField.text ?? ""
+            editingNote.note = noteTextField.text ?? ""
+            note = editingNote
+            noteService.updateNote(note!)
+        }
         delegate?.noteFormSaved()
         dismiss(animated: true, completion: nil)
     }
@@ -46,30 +62,6 @@ class NoteFormViewController: UIViewController, UITextFieldDelegate {
             
         }
     }
-    
-    // MARK: - Navigation
-    
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        super.prepare(for: segue, sender: sender)
-        
-        guard let button = sender as? UIBarButtonItem, button == saveButton else {
-            print("The save button was not pressed, cancelling")
-            return
-        }
-        
-        note = Note(
-            id:Int.random(in: 1..<1000),
-            title: titleTextField.text ?? "",
-            note: noteTextField.text ?? "",
-            author: "",
-            image: "",
-            createdAt: Date()
-        )
-        
-        noteService.addNote(note!)
-    }
-    
 }
 
 protocol NoteFormDelegate {

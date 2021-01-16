@@ -83,7 +83,7 @@
                     <navigationItem key="navigationItem" title="Notes" id="P5K-iU-GXM">
                         <barButtonItem key="rightBarButtonItem" title="New Note" image="plus" catalog="system" id="zrF-9u-sjc">
                             <connections>
-                                <segue destination="1Vz-tN-rMC" kind="modal" identifier="ToNoteForm" id="r7U-Ld-FXP"/>
+                                <segue destination="1Vz-tN-rMC" kind="presentation" identifier="ToNoteForm" id="r7U-Ld-FXP"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -120,35 +120,45 @@
                         <rect key="frame" x="0.0" y="0.0" width="390" height="790"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KdL-O7-8ST">
-                                <rect key="frame" x="16" y="119" width="358" height="34"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EPk-WG-KuK">
-                                <rect key="frame" x="16" y="90" width="33" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Note" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wfk-QW-Xd4">
-                                <rect key="frame" x="16" y="161" width="37" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RNn-GC-NZ1">
-                                <rect key="frame" x="16" y="190" width="358" height="34"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="FQ1-Hc-iry">
+                                <rect key="frame" x="0.0" y="56" width="390" height="700"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EPk-WG-KuK">
+                                        <rect key="frame" x="0.0" y="0.0" width="390" height="20.333333333333332"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KdL-O7-8ST">
+                                        <rect key="frame" x="0.0" y="20.333333333333329" width="390" height="34"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="34" id="Bk4-69-jRP"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Note" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wfk-QW-Xd4">
+                                        <rect key="frame" x="0.0" y="54.333333333333336" width="390" height="20.333333333333336"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="top" usesAttributedText="YES" allowsEditingTextAttributes="YES" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RNn-GC-NZ1">
+                                        <rect key="frame" x="0.0" y="74.666666666666686" width="390" height="625.33333333333326"/>
+                                        <attributedString key="attributedText"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="zeq-5H-nZU"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="FQ1-Hc-iry" firstAttribute="trailing" secondItem="zeq-5H-nZU" secondAttribute="trailing" id="3er-Di-Axa"/>
+                            <constraint firstItem="FQ1-Hc-iry" firstAttribute="top" secondItem="zeq-5H-nZU" secondAttribute="top" id="OXx-vE-0WL"/>
+                            <constraint firstItem="FQ1-Hc-iry" firstAttribute="bottom" secondItem="zeq-5H-nZU" secondAttribute="bottom" id="SdE-up-Pz0"/>
+                            <constraint firstItem="FQ1-Hc-iry" firstAttribute="leading" secondItem="zeq-5H-nZU" secondAttribute="leading" id="mTj-wq-uTA"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="New Note" id="XhT-f5-4Qn">
                         <barButtonItem key="leftBarButtonItem" title="Cancel" id="GhH-8j-uU2">
@@ -207,6 +217,7 @@
                         <barButtonItem key="rightBarButtonItem" systemItem="edit" id="eBC-5U-h8U">
                             <connections>
                                 <action selector="editNote:" destination="agr-Am-S4S" id="saQ-0q-Jdh"/>
+                                <segue destination="1Vz-tN-rMC" kind="presentation" identifier="ToEditNote" id="qZh-Dl-h8U"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -284,6 +295,9 @@
             <point key="canvasLocation" x="-1096" y="-603"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="r7U-Ld-FXP"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
         <image name="note.text" catalog="system" width="128" height="106"/>

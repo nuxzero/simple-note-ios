@@ -9,6 +9,8 @@ import UIKit
 
 class NoteDetailViewController: UIViewController {
 
+    let noteService = NoteService.shared
+    
     var note: Note?
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
@@ -17,27 +19,46 @@ class NoteDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        guard let note = note else {
-            fatalError("Could not found note object.")
-        }
-        
-        titleLabel.text = note.title
-        descriptionLabel.text = note.note
-        ImageLoader.loadImage(with: bannerImageView, for: note.image)
+        updateView()
     }
     
     @IBAction func editNote(_ sender: Any) {
         print("Go to note form")
     }
     
-    /*
+    
+    func updateView() {
+        guard let note = noteService.retrieveNote(note!.id) else {
+            fatalError("Note not found.")
+        }
+        titleLabel.text = note.title
+        descriptionLabel.text = note.note
+        ImageLoader.loadImage(with: bannerImageView, for: note.image)
+    }
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        
+        if segue.identifier == "ToEditNote" {
+            guard let destinationViewController = segue.destination as? UINavigationController,
+                  let noteFormViewController = destinationViewController.children[0] as? NoteFormViewController else {
+                fatalError("The segue is not instance of NoteFormViewController.")
+            }
+            noteFormViewController.delegate = self
+            noteFormViewController.note = note
+        }
     }
-    */
 
+}
+
+extension NoteDetailViewController: NoteFormDelegate {
+    func noteFormSaved() {
+        updateView()
+    }
+    
+    func noteFormCancelled() {
+        
+    }
 }
