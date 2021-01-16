@@ -16,6 +16,8 @@ class NotesViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     override func viewDidLoad() { 
         notes = noteService.retrieveNotes()
+        
+        navigationController?.navigationBar.prefersLargeTitles = true
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
