@@ -14,10 +14,10 @@ class NotesViewController: UIViewController, UITableViewDataSource, UITableViewD
     let noteService = NoteService.shared
     var notes:[Note] = []
     
-    override func viewDidLoad() { 
-        notes = noteService.retrieveNotes()
-        
+    override func viewDidLoad() {
+        super.viewDidLoad()
         navigationController?.navigationBar.prefersLargeTitles = true
+        notes = noteService.retrieveNotes()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

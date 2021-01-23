@@ -36,6 +36,15 @@ class NoteService {
     }
     
     func retrieveNotes() -> Array<Note> {
+        let request = Note.getNoteListRequest()
+        NetworkService.shared.send(request) { result in
+            switch result {
+            case .success(let data):
+                print(data)
+            case.failure(let error):
+                print(error)
+            }
+        }
         return notes
     }
     

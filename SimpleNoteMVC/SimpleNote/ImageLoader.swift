@@ -15,8 +15,8 @@ class ImageLoader {
         }
         
         URLSession.shared.dataTask(with: url) { (data, urlResponse, error) in
-            if error != nil {
-                print(error!)
+            if let error = error {
+                print(error)
                 return
             }
             

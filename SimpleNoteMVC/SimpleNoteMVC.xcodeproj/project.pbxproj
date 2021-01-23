@@ -11,6 +11,8 @@
 		D31670D825ACAA4F00A0179E /* NoteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31670D725ACAA4F00A0179E /* NoteService.swift */; };
 		D31670DD25ACACA200A0179E /* NotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31670DC25ACACA200A0179E /* NotesViewController.swift */; };
 		D385CC9625B28B0A00C310D7 /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D385CC9525B28B0A00C310D7 /* ImageLoader.swift */; };
+		D3A4ED1325BC2793001D6138 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A4ED1225BC2793001D6138 /* NetworkService.swift */; };
+		D3A4ED1825BC63DA001D6138 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A4ED1725BC63D9001D6138 /* Request.swift */; };
 		D3EC6E8B25ACA66400051CC8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3EC6E8A25ACA66400051CC8 /* AppDelegate.swift */; };
 		D3EC6E8D25ACA66400051CC8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3EC6E8C25ACA66400051CC8 /* SceneDelegate.swift */; };
 		D3EC6E9225ACA66400051CC8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D3EC6E9025ACA66400051CC8 /* Main.storyboard */; };
@@ -45,6 +47,8 @@
 		D31670D725ACAA4F00A0179E /* NoteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteService.swift; sourceTree = "<group>"; };
 		D31670DC25ACACA200A0179E /* NotesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesViewController.swift; sourceTree = "<group>"; };
 		D385CC9525B28B0A00C310D7 /* ImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
+		D3A4ED1225BC2793001D6138 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		D3A4ED1725BC63D9001D6138 /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		D3EC6E8725ACA66400051CC8 /* SimpleNoteMVC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimpleNoteMVC.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3EC6E8A25ACA66400051CC8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D3EC6E8C25ACA66400051CC8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -96,6 +100,15 @@
 			path = models;
 			sourceTree = "<group>";
 		};
+		D3A4ED1125BC2775001D6138 /* data */ = {
+			isa = PBXGroup;
+			children = (
+				D3A4ED1225BC2793001D6138 /* NetworkService.swift */,
+				D3A4ED1725BC63D9001D6138 /* Request.swift */,
+			);
+			path = data;
+			sourceTree = "<group>";
+		};
 		D3EC6E7E25ACA66400051CC8 = {
 			isa = PBXGroup;
 			children = (
@@ -119,6 +132,7 @@
 		D3EC6E8925ACA66400051CC8 /* SimpleNote */ = {
 			isa = PBXGroup;
 			children = (
+				D3A4ED1125BC2775001D6138 /* data */,
 				D31670D125ACA8EE00A0179E /* models */,
 				D3EC6E8A25ACA66400051CC8 /* AppDelegate.swift */,
 				D3EC6E8C25ACA66400051CC8 /* SceneDelegate.swift */,
@@ -284,9 +298,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D3A4ED1325BC2793001D6138 /* NetworkService.swift in Sources */,
 				D3F8B74725AF47870095C686 /* NoteFormViewController.swift in Sources */,
 				D3EC6E8B25ACA66400051CC8 /* AppDelegate.swift in Sources */,
 				D3F8B74225AF46C60095C686 /* NoteDetailViewController.swift in Sources */,
+				D3A4ED1825BC63DA001D6138 /* Request.swift in Sources */,
 				D31670DD25ACACA200A0179E /* NotesViewController.swift in Sources */,
 				D3EC6E8D25ACA66400051CC8 /* SceneDelegate.swift in Sources */,
 				D385CC9625B28B0A00C310D7 /* ImageLoader.swift in Sources */,

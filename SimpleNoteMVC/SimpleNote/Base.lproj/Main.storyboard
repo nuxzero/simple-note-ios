@@ -99,7 +99,7 @@
         <scene sceneID="nxo-WT-yIB">
             <objects>
                 <navigationController id="1Vz-tN-rMC" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="CLW-uX-bAG"/>
+                    <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="CLW-uX-bAG"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="kdm-yg-SPn">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="56"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -110,7 +110,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LB7-Eu-78d" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="627" y="-750"/>
+            <point key="canvasLocation" x="746" y="-680"/>
         </scene>
         <!--New Note-->
         <scene sceneID="B9t-Wg-iOu">
@@ -213,7 +213,7 @@
                         <viewLayoutGuide key="safeArea" id="ihv-qZ-oKG"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Detail" id="OFV-x5-lJl">
+                    <navigationItem key="navigationItem" title="Detail" largeTitleDisplayMode="never" id="OFV-x5-lJl">
                         <barButtonItem key="rightBarButtonItem" systemItem="edit" id="eBC-5U-h8U">
                             <connections>
                                 <action selector="editNote:" destination="agr-Am-S4S" id="saQ-0q-Jdh"/>
