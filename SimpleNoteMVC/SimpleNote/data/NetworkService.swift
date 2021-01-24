@@ -18,7 +18,7 @@ class NetworkService {
     static let apiUrl = "https://blooming-falls-95246.herokuapp.com"
     static let shared = NetworkService()
     
-    func send<T>(_ request: Request<T>, completionHandler: @escaping (Result<Data, Error>) -> Void) {
+    func send<T: Decodable>(_ request: Request<T>, completionHandler: @escaping (Result<T, Error>) -> Void) {
         var urlRequest: URLRequest
         do {
             urlRequest = try buildURLRequest(request)
@@ -28,7 +28,7 @@ class NetworkService {
         }
     
         let  dataTask = URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
-            var result: Result<Data, Error>
+            var result: Result<T, Error>
             defer {
                 DispatchQueue.main.async {
                     completionHandler(result)
@@ -46,8 +46,8 @@ class NetworkService {
             }
             
             do {
-                let dict = try self.parseData(data)
-                result = .success(data)
+                let res = try self.decodeData(T.self, data: data)
+                result = .success(res)
             } catch {
                 result = .failure(error)
             }
@@ -55,15 +55,15 @@ class NetworkService {
         dataTask.resume()
     }
     
-    private func parseData(_ data: Data) throws -> Any {
+    private func decodeData<T: Decodable>(_ type: T.Type, data: Data) throws -> T {
         do {
-            guard let dictionay = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.mutableContainers) as? [Any] else {
-                throw NetworkError.parseDataFailed
-            }
-            print(dictionay)
-            return dictionay
+            let decoder = JSONDecoder()
+            let result = try decoder.decode(type, from: data)
+            print(result)
+            return result
         } catch {
-            throw error
+            print(error)
+            throw NetworkError.parseDataFailed
         }
     }
     

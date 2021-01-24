@@ -38,17 +38,21 @@ class NoteService {
     func retrieveNotes() -> Array<Note> {
         let request = Note.getNoteListRequest()
         NetworkService.shared.send(request) { result in
-            switch result {
-            case .success(let data):
-                print(data)
-            case.failure(let error):
-                print(error)
-            }
+//            switch result {
+//            case .success(let data):
+//                print(data)
+//            case.failure(let error):
+//                print(error)
+//            }
         }
         return notes
     }
     
     func retrieveNote(_ id: Int) -> Note? {
+        let request = Note.getNoteRequest(1)
+        NetworkService.shared.send(request) { result in
+            
+        }
         return notes.first(where: {return $0.id == id})
     }
     

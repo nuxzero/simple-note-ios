@@ -103,6 +103,7 @@
 		D3A4ED1125BC2775001D6138 /* data */ = {
 			isa = PBXGroup;
 			children = (
+				D31670D725ACAA4F00A0179E /* NoteService.swift */,
 				D3A4ED1225BC2793001D6138 /* NetworkService.swift */,
 				D3A4ED1725BC63D9001D6138 /* Request.swift */,
 			);
@@ -141,7 +142,6 @@
 				D3EC6E9325ACA66500051CC8 /* Assets.xcassets */,
 				D3EC6E9525ACA66500051CC8 /* LaunchScreen.storyboard */,
 				D3EC6E9825ACA66500051CC8 /* Info.plist */,
-				D31670D725ACAA4F00A0179E /* NoteService.swift */,
 				D31670DC25ACACA200A0179E /* NotesViewController.swift */,
 				D3F8B74125AF46C60095C686 /* NoteDetailViewController.swift */,
 				D3F8B74625AF47870095C686 /* NoteFormViewController.swift */,
