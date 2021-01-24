@@ -120,17 +120,23 @@
                         <rect key="frame" x="0.0" y="0.0" width="390" height="790"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="FQ1-Hc-iry">
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="FQ1-Hc-iry">
                                 <rect key="frame" x="0.0" y="56" width="390" height="700"/>
                                 <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6m1-wJ-zBU">
+                                        <rect key="frame" x="0.0" y="0.0" width="390" height="146.33333333333334"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="6m1-wJ-zBU" secondAttribute="height" multiplier="16:6" id="XML-wU-ZoT"/>
+                                        </constraints>
+                                    </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EPk-WG-KuK">
-                                        <rect key="frame" x="0.0" y="0.0" width="390" height="20.333333333333332"/>
+                                        <rect key="frame" x="0.0" y="166.33333333333334" width="390" height="20.333333333333343"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KdL-O7-8ST">
-                                        <rect key="frame" x="0.0" y="20.333333333333329" width="390" height="34"/>
+                                        <rect key="frame" x="0.0" y="206.66666666666669" width="390" height="34"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="34" id="Bk4-69-jRP"/>
                                         </constraints>
@@ -138,13 +144,13 @@
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Note" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wfk-QW-Xd4">
-                                        <rect key="frame" x="0.0" y="54.333333333333336" width="390" height="20.333333333333336"/>
+                                        <rect key="frame" x="0.0" y="260.66666666666669" width="390" height="20.333333333333314"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="top" usesAttributedText="YES" allowsEditingTextAttributes="YES" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RNn-GC-NZ1">
-                                        <rect key="frame" x="0.0" y="74.666666666666686" width="390" height="625.33333333333326"/>
+                                        <rect key="frame" x="0.0" y="301" width="390" height="399"/>
                                         <attributedString key="attributedText"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
@@ -173,6 +179,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="imageView" destination="6m1-wJ-zBU" id="Efw-bs-JE1"/>
                         <outlet property="noteTextField" destination="RNn-GC-NZ1" id="F4H-6K-b6G"/>
                         <outlet property="saveButton" destination="aON-79-XUF" id="4Vd-ST-tfn"/>
                         <outlet property="titleTextField" destination="KdL-O7-8ST" id="gUM-Ot-NbY"/>

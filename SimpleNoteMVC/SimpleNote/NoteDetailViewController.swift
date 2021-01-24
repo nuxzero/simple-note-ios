@@ -32,7 +32,7 @@ class NoteDetailViewController: UIViewController {
             case .success(let note):
                 self.titleLabel.text = note.title
                 self.descriptionLabel.text = note.note
-                ImageLoader.loadImage(with: self.bannerImageView, for: note.image)
+                ImageLoader.loadImage(with: self.bannerImageView, for: note.image, completionHandler: nil)
             case .failure(let error):
                 print(error)
             }

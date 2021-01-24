@@ -46,8 +46,8 @@ class NoteService {
             
             switch result {
             case .success(let data):
-                print(data)
-                completionResult = .success(data)
+                print(data!)
+                completionResult = .success(data!)
             case.failure(let error):
                 print(error)
                 completionResult = .failure(error)
@@ -65,8 +65,8 @@ class NoteService {
             
             switch result {
             case .success(let data):
-                print(data)
-                completionResult = .success(data)
+                print(data!)
+                completionResult = .success(data!)
             case.failure(let error):
                 print(error)
                 completionResult = .failure(error)
@@ -84,8 +84,8 @@ class NoteService {
             
             switch result {
             case .success(let data):
-                print(data)
-                completionResult = .success(data)
+                print(data!)
+                completionResult = .success(data!)
             case.failure(let error):
                 print(error)
                 completionResult = .failure(error)
@@ -103,8 +103,8 @@ class NoteService {
             
             switch result {
             case .success(let data):
-                print(data)
-                completionResult = .success(data)
+                print(data!)
+                completionResult = .success(data!)
             case.failure(let error):
                 print(error)
                 completionResult = .failure(error)
@@ -117,18 +117,18 @@ class NoteService {
 //        notes.insert(note, at: index)
     }
     
-    func deleteNote(_ id: Int, completionHandler: @escaping (Result<Note, Error>) -> Void) {
+    func deleteNote(_ id: Int, completionHandler: @escaping (Result<Note?, Error>) -> Void) {
 //        notes.removeAll(where: {return $0.id == id})
         let request = Note.deleteNoteRequest(id)
         networkService.send(request) { result in
-            var completionResult: Result<Note, Error>
+            var completionResult: Result<Note?, Error>
             defer {
                 completionHandler(completionResult)
             }
             
             switch result {
             case .success(let data):
-                print(data)
+                print("Deleted note: \(data)")
                 completionResult = .success(data)
             case.failure(let error):
                 print(error)

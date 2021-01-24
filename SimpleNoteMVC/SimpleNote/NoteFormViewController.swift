@@ -12,20 +12,28 @@ class NoteFormViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var noteTextField: UITextField!
     @IBOutlet weak var saveButton: UIBarButtonItem!
+    @IBOutlet weak var imageView: UIImageView!
     
     var delegate: NoteFormDelegate?
     var note: Note?
     private let noteService = NoteService.shared
     var isNewNote = true
+    var randomImageUrl: URL?
     
     override func viewDidLoad() {
         super.viewDidLoad()
       
-        if note != nil {
+        if let note = note {
             isNewNote = false
-            titleTextField.text = note?.title
-            noteTextField.text = note?.note
+            titleTextField.text = note.title
+            noteTextField.text = note.note
+            ImageLoader.loadImage(with: imageView, for: note.image, completionHandler: nil)
+        } else {
+            randomImage()
         }
+        
+        imageView.isUserInteractionEnabled = true
+        imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(randomImage)))
     }
     
     @IBAction func saveNote(_ sender: UIBarButtonItem) {
@@ -41,6 +49,20 @@ class NoteFormViewController: UIViewController, UITextFieldDelegate {
         dismiss(animated: true, completion: nil)
     }
     
+    @objc func randomImage() {
+        let url = "https://picsum.photos/id/\(Int.random(in: 1..<1000))/800/1200"
+        ImageLoader.loadImage(with: imageView, for: url) { result in
+            switch result {
+            case .success(let url):
+                self.randomImageUrl = url
+            case .failure(let error):
+                print(error)
+            }
+        }
+        
+        print("random image")
+    }
+    
     func textFieldDidEndEditing(_ textField: UITextField) {
         if textField == titleTextField {
             
@@ -54,7 +76,7 @@ class NoteFormViewController: UIViewController, UITextFieldDelegate {
             title: titleTextField.text ?? "",
             note: noteTextField.text ?? "",
             author: "John Doe",
-            image: "https://picsum.photos/id/\(id)/800/1200",
+            image: randomImageUrl?.absoluteString ?? "",
             createdAt: Date()
         )
         noteService.addNote(parameters) { result in

@@ -44,7 +44,7 @@ class NoteListViewController: UIViewController, UITableViewDataSource, UITableVi
         let note = notes[indexPath.row]
         
         cell.titleLabel.text = note.title
-        ImageLoader.loadImage(with: cell.thumbImageView, for: note.image)
+        ImageLoader.loadImage(with: cell.thumbImageView, for: note.image, completionHandler: nil)
         
         return cell
     }

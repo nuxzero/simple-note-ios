@@ -18,7 +18,7 @@ class NetworkService {
     static let apiUrl = "https://blooming-falls-95246.herokuapp.com"
     static let shared = NetworkService()
     
-    func send<T: Decodable>(_ request: Request<T>, completionHandler: @escaping (Result<T, Error>) -> Void) {
+    func send<T: Decodable>(_ request: Request<T>, completionHandler: @escaping (Result<T?, Error>) -> Void) {
         var urlRequest: URLRequest
         do {
             urlRequest = try buildURLRequest(request)
@@ -28,7 +28,7 @@ class NetworkService {
         }
         
         let  dataTask = URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
-            var result: Result<T, Error>
+            var result: Result<T?, Error>
             defer {
                 DispatchQueue.main.async {
                     completionHandler(result)
@@ -47,8 +47,13 @@ class NetworkService {
             }
             
             do {
-                let res = try self.decodeData(T.self, data: data)
-                result = .success(res)
+                if request.method == .delete {
+                    // TODO: Delete API is returned "{}" response. So, return nil.
+                    result = .success(nil)
+                } else {
+                    let res = try self.decodeData(T.self, data: data)
+                    result = .success(res)
+                }
             } catch {
                 result = .failure(error)
             }

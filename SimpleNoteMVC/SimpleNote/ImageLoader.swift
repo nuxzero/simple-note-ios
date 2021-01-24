@@ -9,7 +9,7 @@ import UIKit
 import Foundation
 
 class ImageLoader {
-    static func loadImage(with imageView: UIImageView, for urlString: String) {
+    static func loadImage(with imageView: UIImageView, for urlString: String, completionHandler: ( (Result<URL, Error>) -> Void)?) {
         guard let url = URL(string: urlString) else {
             return
         }
@@ -21,10 +21,13 @@ class ImageLoader {
             }
             
             guard let data = data else {
+                completionHandler?(.failure(error!))
                 return
             }
+            
             DispatchQueue.main.async {
                 imageView.image = UIImage(data: data)
+                completionHandler?(.success(urlResponse!.url!))
             }
         }.resume()
     }
