@@ -12,6 +12,7 @@ class NoteService {
     static let shared = NoteService()
     
     private var notes:[Note] = []
+    private let networkService = NetworkService.shared
     
     init() {
         notes += [
@@ -35,25 +36,42 @@ class NoteService {
         
     }
     
-    func retrieveNotes() -> Array<Note> {
+    func retrieveNotes(_ completionHandler: @escaping (Result<[Note], Error>) -> Void) {
         let request = Note.getNoteListRequest()
-        NetworkService.shared.send(request) { result in
-//            switch result {
-//            case .success(let data):
-//                print(data)
-//            case.failure(let error):
-//                print(error)
-//            }
+        networkService.send(request) { result in
+            var completionResult: Result<[Note], Error>
+            defer {
+                completionHandler(completionResult)
+            }
+            
+            switch result {
+            case .success(let data):
+                print(data)
+                completionResult = .success(data)
+            case.failure(let error):
+                print(error)
+                completionResult = .failure(error)
+            }
         }
-        return notes
     }
     
-    func retrieveNote(_ id: Int) -> Note? {
-        let request = Note.getNoteRequest(1)
-        NetworkService.shared.send(request) { result in
+    func retrieveNote(with id: Int, completionHandler: @escaping (Result<Note, Error>) -> Void) {
+        let request = Note.getNoteRequest(id)
+        networkService.send(request) { result in
+            var completionResult: Result<Note, Error>
+            defer {
+                completionHandler(completionResult)
+            }
             
+            switch result {
+            case .success(let data):
+                print(data)
+                completionResult = .success(data)
+            case.failure(let error):
+                print(error)
+                completionResult = .failure(error)
+            }
         }
-        return notes.first(where: {return $0.id == id})
     }
     
     func addNote(_ note: Note) {

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class NotesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class NoteListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -17,7 +17,19 @@ class NotesViewController: UIViewController, UITableViewDataSource, UITableViewD
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.prefersLargeTitles = true
-        notes = noteService.retrieveNotes()
+        retrieveNotes()
+    }
+    
+    func retrieveNotes() {
+        noteService.retrieveNotes { result in
+            switch result {
+            case .success(let data):
+                self.notes = data
+                self.tableView.reloadData()
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -80,10 +92,9 @@ class NotesViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
 }
 
-extension NotesViewController: NoteFormDelegate {
+extension NoteListViewController: NoteFormDelegate {
     func noteFormSaved() {
-        notes = noteService.retrieveNotes()
-        tableView.reloadData()
+        retrieveNotes()
     }
     
     func noteFormCancelled() {

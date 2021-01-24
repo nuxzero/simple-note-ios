@@ -37,6 +37,7 @@ class NetworkService {
             
             if let error = error {
                 result = .failure(error)
+                return
             }
             
             guard let data = data else {

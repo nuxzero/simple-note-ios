@@ -27,12 +27,16 @@ class NoteDetailViewController: UIViewController {
     
     
     func updateView() {
-        guard let note = noteService.retrieveNote(note!.id) else {
-            fatalError("Note not found.")
+        noteService.retrieveNote(with: note!.id) { result in
+            switch result {
+            case .success(let note):
+                self.titleLabel.text = note.title
+                self.descriptionLabel.text = note.note
+                ImageLoader.loadImage(with: self.bannerImageView, for: note.image)
+            case .failure(let error):
+                print(error)
+            }
         }
-        titleLabel.text = note.title
-        descriptionLabel.text = note.note
-        ImageLoader.loadImage(with: bannerImageView, for: note.image)
     }
     
     // MARK: - Navigation
