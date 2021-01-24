@@ -23,8 +23,8 @@ class NoteListViewController: UIViewController, UITableViewDataSource, UITableVi
     func retrieveNotes() {
         noteService.retrieveNotes { result in
             switch result {
-            case .success(let data):
-                self.notes = data
+            case .success(let notes):
+                self.notes = notes
                 self.tableView.reloadData()
             case .failure(let error):
                 print(error)
@@ -62,9 +62,11 @@ class NoteListViewController: UIViewController, UITableViewDataSource, UITableVi
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let note = notes[indexPath.row]
-            noteService.deleteNote(note.id)
-            notes.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .fade)
+            noteService.deleteNote(note.id) { result in
+                
+                self.notes.remove(at: indexPath.row)
+                tableView.deleteRows(at: [indexPath], with: .fade)
+            }
         }
     }
     

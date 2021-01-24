@@ -30,26 +30,10 @@ class NoteFormViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func saveNote(_ sender: UIBarButtonItem) {
         if isNewNote {
-            note = Note(
-                id:Int.random(in: 1..<1000),
-                title: titleTextField.text ?? "",
-                note: noteTextField.text ?? "",
-                author: "",
-                image: "",
-                createdAt: Date()
-            )
-            noteService.addNote(note!)
+            addNote()
         } else {
-            guard var editingNote = note else {
-                fatalError("Note must not be nil.")
-            }
-            editingNote.title = titleTextField.text ?? ""
-            editingNote.note = noteTextField.text ?? ""
-            note = editingNote
-            noteService.updateNote(note!)
+            updateNote()
         }
-        delegate?.noteFormSaved()
-        dismiss(animated: true, completion: nil)
     }
     
     @IBAction func cancel(_ sender: UIBarButtonItem) {
@@ -60,6 +44,54 @@ class NoteFormViewController: UIViewController, UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         if textField == titleTextField {
             
+        }
+    }
+    
+    private func addNote() {
+        let id = Int.random(in: 1..<1000)
+        let parameters = NoteParameters(
+            id: id,
+            title: titleTextField.text ?? "",
+            note: noteTextField.text ?? "",
+            author: "John Doe",
+            image: "https://picsum.photos/id/\(id)/800/1200",
+            createdAt: Date()
+        )
+        noteService.addNote(parameters) { result in
+            switch result {
+            case .success(_):
+                print("Add note success.")
+            case .failure(let error):
+                print(error)
+            }
+            self.delegate?.noteFormSaved()
+            self.dismiss(animated: true, completion: nil)
+        }
+    }
+    
+    private func updateNote() {
+        guard let note = note else {
+            fatalError("Note must not be nil.")
+        }
+        
+        let parameters = NoteParameters(
+            id: note.id,
+            title: titleTextField.text ?? "",
+            note: noteTextField.text ?? "",
+            author: "John Doe",
+            image: note.image,
+            createdAt: Date()
+        )
+        
+        noteService.updateNote(parameters) { result in
+            switch result {
+            case .success(_):
+                print("Update note success.")
+            case .failure(let error):
+                print(error)
+            }
+            self.delegate?.noteFormSaved()
+            self.dismiss(animated: true, completion: nil)
         }
     }
 }

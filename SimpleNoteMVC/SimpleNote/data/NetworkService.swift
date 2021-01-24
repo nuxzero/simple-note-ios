@@ -26,7 +26,7 @@ class NetworkService {
             completionHandler(.failure(error))
             return
         }
-    
+        
         let  dataTask = URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
             var result: Result<T, Error>
             defer {
@@ -75,8 +75,14 @@ class NetworkService {
         
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = request.method.rawValue
-        if (request.method != .get) {
-            urlRequest.httpBody = Data() // TODO: set body
+        urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        urlRequest.setValue("application/json", forHTTPHeaderField: "Accept")
+        
+        let allowedMethods: [RequestMethod] = [.post, .patch, .put]
+        if allowedMethods.contains(request.method) {
+            if let parameters = request.body {
+                urlRequest.httpBody = try parameters.encodeData()
+            }
         }
         return urlRequest
     }

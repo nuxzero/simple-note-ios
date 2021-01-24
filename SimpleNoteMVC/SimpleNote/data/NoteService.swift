@@ -74,19 +74,67 @@ class NoteService {
         }
     }
     
-    func addNote(_ note: Note) {
-        notes.append(note)
-    }
-    
-    func updateNote(_ note: Note) {
-        guard let index = notes.firstIndex(where: {return $0.id == note.id}) else {
-            fatalError("Index not found.")
+    func addNote(_ parameters: NoteParameters, completionHandler: @escaping (Result<Note, Error>) -> Void) {
+        let request = Note.createNoteRequest(parameters)
+        networkService.send(request) { result in
+            var completionResult: Result<Note, Error>
+            defer {
+                completionHandler(completionResult)
+            }
+            
+            switch result {
+            case .success(let data):
+                print(data)
+                completionResult = .success(data)
+            case.failure(let error):
+                print(error)
+                completionResult = .failure(error)
+            }
         }
-        notes.remove(at: index)
-        notes.insert(note, at: index)
     }
     
-    func deleteNote(_ id: Int) {
-        notes.removeAll(where: {return $0.id == id})
+    func updateNote(_ parameters: NoteParameters, completionHandler: @escaping (Result<Note, Error>) -> Void) {
+        let request = Note.updateNoteRequest(parameters)
+        networkService.send(request) { result in
+            var completionResult: Result<Note, Error>
+            defer {
+                completionHandler(completionResult)
+            }
+            
+            switch result {
+            case .success(let data):
+                print(data)
+                completionResult = .success(data)
+            case.failure(let error):
+                print(error)
+                completionResult = .failure(error)
+            }
+        }
+//        guard let index = notes.firstIndex(where: {return $0.id == note.id}) else {
+//            fatalError("Index not found.")
+//        }
+//        notes.remove(at: index)
+//        notes.insert(note, at: index)
+    }
+    
+    func deleteNote(_ id: Int, completionHandler: @escaping (Result<Note, Error>) -> Void) {
+//        notes.removeAll(where: {return $0.id == id})
+        let request = Note.deleteNoteRequest(id)
+        networkService.send(request) { result in
+            var completionResult: Result<Note, Error>
+            defer {
+                completionHandler(completionResult)
+            }
+            
+            switch result {
+            case .success(let data):
+                print(data)
+                completionResult = .success(data)
+            case.failure(let error):
+                print(error)
+                completionResult = .failure(error)
+            }
+        }
+        
     }
 }

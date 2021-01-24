@@ -23,15 +23,8 @@ struct Note: Codable {
         author = try containers.decode(String.self, forKey: .author)
         image = try containers.decode(String.self, forKey: .image)
         
-        let dateFormatter = DateFormatter()
-        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
-        // Use format appropriate to your JSON String.  This is for ISO-8601
-        // You MUST account for the milliseconds even if you don't want them
-        // or it won't parse properly
-        dateFormatter.dateFormat = "yy-MM-dd'T'HH:mm:ssZ"
-        
         let dateStr = try containers.decode(String.self, forKey: .createdAt)
-        createdAt = dateFormatter.date(from: dateStr)
+        createdAt = DateUtils.dateFormatter.date(from: dateStr)
     }
     
     init(id: Int, title: String, note: String, author: String, image: String, createdAt: Date) {
@@ -44,9 +37,6 @@ struct Note: Codable {
     }
 }
 
-
- 
-
 extension Note {
     private enum CodingKeys: String, CodingKey {
         case id
@@ -58,7 +48,7 @@ extension Note {
     }
 }
 
-struct CreateNoteParameters: Encodable {
+struct NoteParameters: Parameters {
     var id: Int
     var title: String
     var note: String
@@ -74,10 +64,17 @@ struct CreateNoteParameters: Encodable {
         case image
         case createdAt = "created_at"
     }
-}
-
-struct GetNoteListRequest {
     
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(id, forKey: .id)
+        try container.encode(title, forKey: .title)
+        try container.encode(note, forKey: .note)
+        try container.encode(author, forKey: .author)
+        try container.encode(image, forKey: .image)
+        try container.encode(DateUtils.dateFormatter.string(from: createdAt), forKey: .createdAt)
+        
+    }
 }
 
 extension Note {
@@ -89,7 +86,15 @@ extension Note {
         return Request<Note>(path: "notes/\(id)", method: .get, body: nil)
     }
     
-    static func createNoteRequest(_ parameters: CreateNoteParameters) -> Request<Note> {
+    static func createNoteRequest(_ parameters: NoteParameters) -> Request<Note> {
         return Request<Note>(path: "notes", method: .post, body: parameters)
+    }
+    
+    static func updateNoteRequest(_ parameters: NoteParameters) -> Request<Note> {
+        return Request<Note>(path: "notes/\(parameters.id)", method: .patch, body: parameters)
+    }
+    
+    static func deleteNoteRequest(_ id: Int) -> Request<Note> {
+        return Request<Note>(path: "notes/\(id)", method: .delete, body: nil)
     }
 }

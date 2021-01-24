@@ -18,5 +18,5 @@ enum RequestMethod: String {
 struct Request<T> {
     var path: String
     var method: RequestMethod
-    var body: Encodable?
+    var body: Parameters?
 }
